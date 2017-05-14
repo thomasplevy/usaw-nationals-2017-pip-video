@@ -99,22 +99,22 @@
 	<section class="cf split" id="frames">
 
 		<div class="frame" id="blue">
-			<iframe width='640' height='480' frameborder='0' allowfullscreen src='http://player.ooyala.com/static/v4/candidate/latest/skin-plugin/iframe.html?ec=hvc2Y1YjE64OhyI7Ze7hDGRVterCOCGe&pbid=48e7acfbb3f247a9bb7d098981d8cd07&pcode=10Y2sxOvM5voNaBy-zxMG5TyWTxb'></iframe>
+			<iframe width='640' height='360' frameborder='0' allowfullscreen src='http://player.ooyala.com/static/v4/candidate/latest/skin-plugin/iframe.html?ec=hvc2Y1YjE64OhyI7Ze7hDGRVterCOCGe&pbid=48e7acfbb3f247a9bb7d098981d8cd07&pcode=10Y2sxOvM5voNaBy-zxMG5TyWTxb'></iframe>
 		</div>
 
 		<div class="frame" id="red">
-			<iframe width='640' height='480' frameborder='0' allowfullscreen src='http://player.ooyala.com/static/v4/candidate/latest/skin-plugin/iframe.html?ec=FrcWY1YjE6-z93fI0iu3-eYsAgjg_rqB&pbid=48e7acfbb3f247a9bb7d098981d8cd07&pcode=10Y2sxOvM5voNaBy-zxMG5TyWTxb'></iframe>
+			<iframe width='640' height='360' frameborder='0' allowfullscreen src='http://player.ooyala.com/static/v4/candidate/latest/skin-plugin/iframe.html?ec=FrcWY1YjE6-z93fI0iu3-eYsAgjg_rqB&pbid=48e7acfbb3f247a9bb7d098981d8cd07&pcode=10Y2sxOvM5voNaBy-zxMG5TyWTxb'></iframe>
 		</div>
 
 	</section>
 
-	<script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.2.0/jquery.fitvids.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.2.0/jquery.fitvids.min.js"></script>
 	<script>( function(){
 
 		function resizeVids() {
 			$( 'body' ).fitVids( {
-				customSelector: "iframe[src='//player.ooyala.com/']"
+				customSelector: "iframe[src*='//player.ooyala.com/']"
 			} );
 		}
 
