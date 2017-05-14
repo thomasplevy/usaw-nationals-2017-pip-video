@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>PIP</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	<style type="text/css">
+
+		body{
+			background: black;
+			font-family: sans-serif;
+			font-size: 16px;
+		}
+
+		#nav {
+			left: 0;
+			position: fixed;
+			right: 0;
+			text-align: center;
+			top: 0;
+			z-index: 2;
+		}
+
+		#nav:hover {
+			background: rgba( 1, 1, 1, 0.8 );
+		}
+
+		#nav a {
+			color: #fefefe;
+			display: inline-block;
+			padding: 20px;
+			text-decoration: none;
+		}
+
+		#nav a:hover,
+		#nav a.active {
+			text-decoration: underline;
+		}
+
+		#frames {
+			position: relative;
+			z-index: 1;
+		}
+
+		#frames.split {
+			margin-top: 65px;
+		}
+
+		iframe {
+			width: 100%;
+		}
+
+		.frame {
+			float: left;
+			width: 50%;
+		}
+
+		.frame.focused {
+			float: none;
+			left: 0;
+			position: fixed;
+			right: 0;
+			top: 0;
+			width: 100%;
+			z-index: 1;
+		}
+
+		.frame.pip {
+			border: 2px solid #fefefe;
+			float: none;
+			left: 20px;
+			position: fixed;
+			top: 45px;
+			width: 28%;
+			z-index: 2;
+		}
+
+		.cf:before,
+		.cf:after {
+			content: " ";
+			display: table;
+		}
+
+		.cf:after {
+			clear: both;
+		}
+
+	</style>
+</head>
+<body>
+
+	<nav id="nav">
+		<a class="ctrl" data-id="blue" href="#">BLUE</a>
+		<a class="ctrl" data-id="red" href="#">RED</a>
+		<a class="ctrl active" id="split" href="#">SPLIT</a>
+	</nav>
+
+	<section class="cf split" id="frames">
+
+		<div class="frame" id="blue">
+			<iframe width='640' height='480' frameborder='0' allowfullscreen src='http://player.ooyala.com/static/v4/candidate/latest/skin-plugin/iframe.html?ec=hvc2Y1YjE64OhyI7Ze7hDGRVterCOCGe&pbid=48e7acfbb3f247a9bb7d098981d8cd07&pcode=10Y2sxOvM5voNaBy-zxMG5TyWTxb'></iframe>
+		</div>
+
+		<div class="frame" id="red">
+			<iframe width='640' height='480' frameborder='0' allowfullscreen src='http://player.ooyala.com/static/v4/candidate/latest/skin-plugin/iframe.html?ec=FrcWY1YjE6-z93fI0iu3-eYsAgjg_rqB&pbid=48e7acfbb3f247a9bb7d098981d8cd07&pcode=10Y2sxOvM5voNaBy-zxMG5TyWTxb'></iframe>
+		</div>
+
+	</section>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.2.0/jquery.fitvids.min.js"></script>
+	<script>( function(){
+
+		function resizeVids() {
+			$( 'body' ).fitVids( {
+				customSelector: "iframe[src^='http://player.ooyala.com/']"
+			} );
+		}
+
+		resizeVids();
+
+		$( '#nav a.ctrl' ).on( 'click', function() {
+
+			var $btn = $( this ),
+				id = $btn.attr( 'data-id' ),
+				$frame = $( '#' + $btn.attr( 'data-id' ) );
+
+			$btn.addClass( 'active' ).siblings().removeClass( 'active' );
+
+			if ( ! id ) {
+				return;
+			}
+
+			$( '#frames' ).removeClass( 'split' );
+			$( '.frame' ).removeClass( 'focused' ).addClass( 'pip' );
+			$frame.removeClass( 'pip' ).addClass( 'focused' );
+
+			resizeVids();
+		} );
+
+		$( 'a#split' ).on( 'click', function() {
+			$( '#frames' ).addClass( 'split' );
+			$( '.frame' ).removeClass( 'focused pip' );
+		} );
+	} )();</script>
+</body>
+</html>
