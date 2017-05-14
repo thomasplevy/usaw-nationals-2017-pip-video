@@ -130,8 +130,9 @@
 
 		resizeVids();
 
-		$( '#nav a.ctrl' ).on( 'click', function() {
+		$( '#nav a.ctrl' ).on( 'click', function( e ) {
 
+			e.preventDefault();
 			var $btn = $( this ),
 				id = $btn.attr( 'data-id' ),
 				$frame = $( '#' + $btn.attr( 'data-id' ) );
@@ -149,9 +150,12 @@
 			resizeVids();
 		} );
 
-		$( 'a#split' ).on( 'click', function() {
+		$( 'a#split' ).on( 'click', function( e ) {
+
+			e.preventDefault();
 			$( '#frames' ).addClass( 'split' );
 			$( '.frame' ).removeClass( 'focused pip' );
+
 		} );
 	} )();</script>
 </body>
