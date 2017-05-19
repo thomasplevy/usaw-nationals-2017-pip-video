@@ -37,16 +37,20 @@
 			background: rgba( 1, 1, 1, 0.8 );
 		}
 
-		#nav a {
+		#nav > a {
 			color: #fefefe;
 			display: inline-block;
 			padding: 20px;
 			text-decoration: none;
 		}
 
-		#nav a:hover,
-		#nav a.active {
+		#nav > a:hover,
+		#nav > a.active {
 			text-decoration: underline;
+		}
+
+		#nav .social {
+			float: right;
 		}
 
 		#frames {
@@ -134,10 +138,32 @@
 </head>
 <body>
 
+	<script>
+	  window.fbAsyncInit = function() {
+	    FB.init({
+	      appId      : '330114430725306',
+	      xfbml      : true,
+	      version    : 'v2.9'
+	    });
+	    FB.AppEvents.logPageView();
+	  };
+
+	  (function(d, s, id){
+	     var js, fjs = d.getElementsByTagName(s)[0];
+	     if (d.getElementById(id)) {return;}
+	     js = d.createElement(s); js.id = id;
+	     js.src = "http://connect.facebook.net/en_US/sdk.js";
+	     fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+	</script>
+
 	<nav id="nav">
 		<a class="ctrl" data-id="east" href="#">EAST</a>
 		<a class="ctrl" data-id="south" href="#">SOUTH</a>
 		<a class="ctrl active" id="split" href="#">SPLIT</a>
+		<div class="social">
+			<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+		</div>
 	</nav>
 
 	<section class="cf split" id="frames">
