@@ -189,9 +189,14 @@
 				return;
 			}
 
+			var curr_pip_pos = $( '.frame.pip' ).attr( 'style' );
+
 			$( '#frames' ).removeClass( 'split' );
 			$( '.frame' ).removeClass( 'focused' ).addClass( 'pip' );
-			$frame.removeClass( 'pip' ).addClass( 'focused' );
+			if ( curr_pip_pos ) {
+				$( '.frame' ).attr( 'style', curr_pip_pos );
+			}
+			$frame.removeClass( 'pip' ).addClass( 'focused' ).removeAttr( 'style' );
 
 			resizeVids();
 			makeDraggable();
