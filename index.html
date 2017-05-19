@@ -44,14 +44,22 @@
 			text-decoration: none;
 		}
 
+		#nav .social {
+			display: none;
+			position: absolute;
+			right: 20px;
+			top: 20px;
+		}
+
+		#nav:hover .social {
+			display: block;
+		}
+
 		#nav > a:hover,
 		#nav > a.active {
 			text-decoration: underline;
 		}
 
-		#nav .social {
-			float: right;
-		}
 
 		#frames {
 			position: relative;
@@ -123,6 +131,11 @@
 			clear: both;
 		}
 
+		#ads {
+			margin: 10px;
+			text-align: center;
+		}
+
 	</style>
 
 	<!-- GA -->
@@ -162,7 +175,7 @@
 		<a class="ctrl" data-id="south" href="#">SOUTH</a>
 		<a class="ctrl active" id="split" href="#">SPLIT</a>
 		<div class="social">
-			<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+			<div class="fb-like" data-share="true" data-width="100" data-show-faces="true"></div>
 		</div>
 	</nav>
 
@@ -182,12 +195,14 @@
 
 	</section>
 
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	<!-- THP - 2017 Regionals -->
-	<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6121362130042378" data-ad-slot="4849463245"></ins>
-	<script>
-	(adsbygoogle = window.adsbygoogle || []).push({});
-	</script>
+	<section id="ads">
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- THP - 2017 Regionals -->
+		<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6121362130042378" data-ad-slot="4849463245"></ins>
+		<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+	</section>
 
 	<!-- <a href="https://github.com/thomasplevy/usaw-nationals-2017-pip-video"><img style="position: absolute; top: 0; right: 0; border: 0;z-index: 3" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a> -->
 
