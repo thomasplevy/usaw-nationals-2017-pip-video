@@ -139,6 +139,14 @@
 			text-align: center;
 		}
 
+		#alert {
+			color: #fefefe;
+			font-weight: 700;
+			left: 20px;
+			position: absolute;
+			top: 20px;
+		}
+
 	</style>
 
 	<!-- GA -->
@@ -185,13 +193,13 @@
 	<section class="cf split" id="frames">
 
 		<div class="frame" id="east">
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/ct-0sXdanRk" frameborder="0" allowfullscreen></iframe>
+			<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/ct-0sXdanRk" frameborder="0" allowfullscreen></iframe> -->
 			<div class="handle"><span>.. .. ..</span></div>
 			<!-- <iframe width='640' height='360' frameborder='0' allowfullscreen src='http://player.ooyala.com/static/v4/candidate/latest/skin-plugin/iframe.html?ec=hvc2Y1YjE64OhyI7Ze7hDGRVterCOCGe&pbid=48e7acfbb3f247a9bb7d098981d8cd07&pcode=10Y2sxOvM5voNaBy-zxMG5TyWTxb'></iframe> -->
 		</div>
 
 		<div class="frame" id="south">
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/cr2vFfX9wlY" frameborder="0" allowfullscreen></iframe>
+			<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/cr2vFfX9wlY" frameborder="0" allowfullscreen></iframe> -->
 			<div class="handle"><span>.. .. ..</span></div>
 			<!-- <iframe width='640' height='360' frameborder='0' allowfullscreen src='http://player.ooyala.com/static/v4/candidate/latest/skin-plugin/iframe.html?ec=FrcWY1YjE6-z93fI0iu3-eYsAgjg_rqB&pbid=48e7acfbb3f247a9bb7d098981d8cd07&pcode=10Y2sxOvM5voNaBy-zxMG5TyWTxb'></iframe> -->
 		</div>
@@ -269,17 +277,52 @@
 
 		} );
 
-		// var key = 'AIzaSyB53lwe2PqEHZX9do9umNwXZ9EC3wgn0g8',
-		// 	playlist_id = 'UUtcQ6TPwXAYgZ1Mcl3M1vng',
-		// 	endpoint = 'https://www.googleapis.com/youtube/v3/';
+		var key = 'AIzaSyB53lwe2PqEHZX9do9umNwXZ9EC3wgn0g8',
+			endpoint = 'https://www.googleapis.com/youtube/v3/';
 
+		window.pipframes = {
+			east: '',
+			south: '',
+		};
 
-		// $.get( endpoint + 'playlistItems?maxResults=50&part=contentDetails,id,snippet,status&playlistId=' + playlist_id + '&&key=' + key, function( r ) {
-		// 	console.log( r );
-		// } );
+		function getLiveVids( warn ) {
+			console.log( 'finding current streams' );
+			$.get( endpoint + 'search?part=snippet&type=video&channelId=UCtcQ6TPwXAYgZ1Mcl3M1vng&eventType=live&key=' + key, function( r ) {
+				if ( r.items ) {
+					$.each( r.items, function( i, vid ) {
+						var title = vid.snippet.title.toLowerCase();
+						$.each( window.pipframes, function( frame_id ) {
+							if ( 0 === title.indexOf( frame_id ) ) {
 
+								if ( window.pipframes[ frame_id ] !== vid.id.videoId ) {
+									window.pipframes[ frame_id ] = vid.id.videoId;
+									loadVideoFrame( frame_id, warn );
+								}
 
+							}
+						} );
+					} );
+				}
+				resizeVids();
+				console.log( 'found streams' );
+				console.log( window.pipframes );
+			} );
+		}
 
+		function loadVideoFrame( frame_id, warn ) {
+			if ( warn ) {
+				if ( ! $( '#alert' ).length ) {
+					$( '#nav' ).prepend( '<div id="alert">A new stream is available. Reload your page to get the new stream!</div>' );
+				}
+			} else {
+				$( '#' + frame_id ).prepend( '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + window.pipframes[ frame_id ] + '" frameborder="0" allowfullscreen></iframe>' );
+			}
+		}
+
+		getLiveVids( false );
+		window.setInterval( function () {
+			getLiveVids( true );
+		}, 60000 * 5 );
 
 	} )();</script>
 </body>
