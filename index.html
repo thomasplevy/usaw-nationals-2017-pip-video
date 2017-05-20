@@ -19,9 +19,18 @@
 	<style type="text/css">
 
 		body{
-			background: black;
+			background: #101010;
 			font-family: sans-serif;
 			font-size: 16px;
+		}
+
+		body:after {
+			content:  url('assets/logo.png');
+			left: 50%;
+			margin-left: -150px;
+			opacity: 0.1;
+			position: absolute;
+			top: 200px;
 		}
 
 		#nav {
@@ -92,9 +101,7 @@
 		.frame.pip {
 			border: 2px solid #fefefe;
 			float: none;
-			/*left: 20px;*/
 			position: fixed;
-			/*top: 45px;*/
 			right: 25px;
 			top: 25px;
 			width: 28%;
@@ -140,45 +147,129 @@
 		}
 
 		#alert {
+			background: rgba( 254, 254, 254, 0.8 );
+			bottom: 0;
+			color: #b50000;
+			font-size: 18px;
+			left: 0px;
+			padding: 20px;
+			position: fixed;
+			right: 0px;
+			text-align: center;
+			z-index: 3;
+		}
+
+		#alert .remove {
+			float: right;
+		}
+
+		.remove {
+			color: #bf0000;
+			line-height: 18px;
+			font-size: 24px;
+			text-decoration: none;
+		}
+
+		.loader,
+		.loader:before,
+		.loader:after {
+			border-radius: 50%;
+		}
+		.loader {
 			color: #fefefe;
-			font-weight: 700;
-			left: 20px;
+			font-size: 11px;
+			text-indent: -99999em;
+			margin: 55px auto;
+			position: relative;
+			width: 10em;
+			height: 10em;
+			box-shadow: inset 0 0 0 1em;
+			-webkit-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			transform: translateZ(0);
+		}
+		.loader:before,
+		.loader:after {
 			position: absolute;
-			top: 20px;
+			content: '';
+		}
+		.loader:before {
+			width: 5.2em;
+			height: 10.2em;
+			background: #101010;
+			border-radius: 10.2em 0 0 10.2em;
+			top: -0.1em;
+			left: -0.1em;
+			-webkit-transform-origin: 5.2em 5.1em;
+			transform-origin: 5.2em 5.1em;
+			-webkit-animation: load2 2s infinite ease 1.5s;
+			animation: load2 2s infinite ease 1.5s;
+		}
+		.loader:after {
+			width: 5.2em;
+			height: 10.2em;
+			background: #101010;
+			border-radius: 0 10.2em 10.2em 0;
+			top: -0.1em;
+			left: 5.1em;
+			-webkit-transform-origin: 0px 5.1em;
+			transform-origin: 0px 5.1em;
+			-webkit-animation: load2 2s infinite ease;
+			animation: load2 2s infinite ease;
+		}
+		@-webkit-keyframes load2 {
+			0% {
+				-webkit-transform: rotate(0deg);
+				transform: rotate(0deg);
+			}
+			100% {
+				-webkit-transform: rotate(360deg);
+				transform: rotate(360deg);
+			}
+		}
+		@keyframes load2 {
+			0% {
+				-webkit-transform: rotate(0deg);
+				transform: rotate(0deg);
+			}
+			100% {
+				-webkit-transform: rotate(360deg);
+				transform: rotate(360deg);
+			}
 		}
 
 	</style>
 
 	<!-- GA -->
 	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	  ga('create', 'UA-99101531-1', 'auto');
-	  ga('send', 'pageview');
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-99101531-1', 'auto');
+		ga('send', 'pageview');
 	</script>
 
 </head>
 <body>
 
 	<script>
-	  window.fbAsyncInit = function() {
-	    FB.init({
-	      appId      : '330114430725306',
-	      xfbml      : true,
-	      version    : 'v2.9'
-	    });
-	    FB.AppEvents.logPageView();
-	  };
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '330114430725306',
+				xfbml      : true,
+				version    : 'v2.9'
+			});
+			FB.AppEvents.logPageView();
+		};
 
-	  (function(d, s, id){
-	     var js, fjs = d.getElementsByTagName(s)[0];
-	     if (d.getElementById(id)) {return;}
-	     js = d.createElement(s); js.id = id;
-	     js.src = "http://connect.facebook.net/en_US/sdk.js";
-	     fjs.parentNode.insertBefore(js, fjs);
-	   }(document, 'script', 'facebook-jssdk'));
+		(function(d, s, id){
+			 var js, fjs = d.getElementsByTagName(s)[0];
+			 if (d.getElementById(id)) {return;}
+			 js = d.createElement(s); js.id = id;
+			 js.src = "http://connect.facebook.net/en_US/sdk.js";
+			 fjs.parentNode.insertBefore(js, fjs);
+		 }(document, 'script', 'facebook-jssdk'));
 	</script>
 
 	<nav id="nav">
@@ -193,15 +284,13 @@
 	<section class="cf split" id="frames">
 
 		<div class="frame" id="east">
-			<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/ct-0sXdanRk" frameborder="0" allowfullscreen></iframe> -->
+			<div class="loader"></div>
 			<div class="handle"><span>.. .. ..</span></div>
-			<!-- <iframe width='640' height='360' frameborder='0' allowfullscreen src='http://player.ooyala.com/static/v4/candidate/latest/skin-plugin/iframe.html?ec=hvc2Y1YjE64OhyI7Ze7hDGRVterCOCGe&pbid=48e7acfbb3f247a9bb7d098981d8cd07&pcode=10Y2sxOvM5voNaBy-zxMG5TyWTxb'></iframe> -->
 		</div>
 
 		<div class="frame" id="south">
-			<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/cr2vFfX9wlY" frameborder="0" allowfullscreen></iframe> -->
+			<div class="loader"></div>
 			<div class="handle"><span>.. .. ..</span></div>
-			<!-- <iframe width='640' height='360' frameborder='0' allowfullscreen src='http://player.ooyala.com/static/v4/candidate/latest/skin-plugin/iframe.html?ec=FrcWY1YjE6-z93fI0iu3-eYsAgjg_rqB&pbid=48e7acfbb3f247a9bb7d098981d8cd07&pcode=10Y2sxOvM5voNaBy-zxMG5TyWTxb'></iframe> -->
 		</div>
 
 	</section>
@@ -285,10 +374,29 @@
 			south: '',
 		};
 
+		function addNotice( msg ) {
+			var $alert = $( '#alert' ),
+				$remover = $( '<a class="remove" href="#">&times;</a>' );
+
+			if ( ! $alert.length ) {
+				$alert = $( '<div id="alert" /> ' );
+				$( 'body' ).append( $alert );
+			}
+
+			$alert.html( msg );
+			$alert.append( $remover );
+			$remover.on( 'click', function( e ) {
+				e.preventDefault();
+				$( '#alert' ).remove();
+			} );
+
+		}
+
 		function getLiveVids( warn ) {
 			console.log( 'finding current streams' );
 			$.get( endpoint + 'search?part=snippet&type=video&channelId=UCtcQ6TPwXAYgZ1Mcl3M1vng&eventType=live&key=' + key, function( r ) {
-				if ( r.items ) {
+				if ( r.items && r.items.length ) {
+					console.log( 'found streams' );
 					$.each( r.items, function( i, vid ) {
 						var title = vid.snippet.title.toLowerCase();
 						$.each( window.pipframes, function( frame_id ) {
@@ -302,20 +410,22 @@
 							}
 						} );
 					} );
+				} else {
+					$( '.loader' ).remove();
+					addNotice( 'No streams found. Try back when the streams are live (Sat 5/20 at 5:50am PST).' );
 				}
 				resizeVids();
-				console.log( 'found streams' );
 				console.log( window.pipframes );
 			} );
 		}
 
 		function loadVideoFrame( frame_id, warn ) {
 			if ( warn ) {
-				if ( ! $( '#alert' ).length ) {
-					$( '#nav' ).prepend( '<div id="alert">A new stream is available. Reload your page to get the new stream!</div>' );
-				}
+				addNotice( 'A new stream is available. Reload your page to get the new stream!' );
 			} else {
-				$( '#' + frame_id ).prepend( '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + window.pipframes[ frame_id ] + '" frameborder="0" allowfullscreen></iframe>' );
+				var $frame = $( '#' + frame_id );
+				$frame.find( '.loader' ).remove();
+				$frame.prepend( '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + window.pipframes[ frame_id ] + '" frameborder="0" allowfullscreen></iframe>' );
 			}
 		}
 
