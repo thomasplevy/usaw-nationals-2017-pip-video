@@ -51,6 +51,7 @@
 			display: inline-block;
 			padding: 20px;
 			text-decoration: none;
+			text-transform: uppercase;
 		}
 
 		#nav .social {
@@ -252,7 +253,7 @@
 	</script>
 
 </head>
-<body>
+<body class="triple">
 
 	<script>
 		window.fbAsyncInit = function() {
@@ -274,27 +275,13 @@
 	</script>
 
 	<nav id="nav">
-		<a class="ctrl" data-id="east" href="#">EAST</a>
-		<a class="ctrl" data-id="south" href="#">SOUTH</a>
 		<a class="ctrl active" id="split" href="#">SPLIT</a>
 		<div class="social">
 			<div class="fb-like" data-layout="button" data-action="like" data-colorscheme="dark" data-size="small" data-show-faces="false" data-share="true"></div>
 		</div>
 	</nav>
 
-	<section class="cf split" id="frames">
-
-		<div class="frame" id="east">
-			<div class="loader"></div>
-			<div class="handle"><span>.. .. ..</span></div>
-		</div>
-
-		<div class="frame" id="south">
-			<div class="loader"></div>
-			<div class="handle"><span>.. .. ..</span></div>
-		</div>
-
-	</section>
+	<section class="cf split" id="frames"></section>
 
 	<section id="ads">
 		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -330,50 +317,22 @@
 			} );
 		}
 
-		resizeVids();
-
-		$( '#nav a.ctrl' ).on( 'click', function( e ) {
-
-			e.preventDefault();
-			var $btn = $( this ),
-				id = $btn.attr( 'data-id' ),
-				$frame = $( '#' + $btn.attr( 'data-id' ) );
-
-			$btn.addClass( 'active' ).siblings().removeClass( 'active' );
-
-			if ( ! id ) {
-				return;
-			}
-
-			var curr_pip_pos = $( '.frame.pip' ).attr( 'style' );
-
-			$( '#frames' ).removeClass( 'split' );
-			$( '.frame' ).removeClass( 'focused' ).addClass( 'pip' );
-			if ( curr_pip_pos ) {
-				$( '.frame' ).attr( 'style', curr_pip_pos );
-			}
-			$frame.removeClass( 'pip' ).addClass( 'focused' ).removeAttr( 'style' );
-
-			resizeVids();
-			makeDraggable();
-
-		} );
-
-		$( 'a#split' ).on( 'click', function( e ) {
-
-			e.preventDefault();
-			$( '#frames' ).addClass( 'split' );
-			$( '.frame' ).removeClass( 'focused pip' );
-
-		} );
-
 		var key = 'AIzaSyB53lwe2PqEHZX9do9umNwXZ9EC3wgn0g8',
 			endpoint = 'https://www.googleapis.com/youtube/v3/';
 
 		window.pipframes = {
-			east: '',
-			south: '',
+			central: '',
+			california: '',
+			pacific: '',
 		};
+
+		function setupInterface() {
+			$.each( window.pipframes, function( id, video ) {
+				$( '#nav' ).prepend( '<a class="ctrl" data-id="' + id + '" href="#">' + id + '</a>' );
+				$( '#frames' ).prepend( '<div class="frame" id="' + id + '"><div class="loader"></div><div class="handle"><span>.. .. ..</span></div></div>' );
+			} );
+		}
+		setupInterface();
 
 		function addNotice( msg ) {
 			var $alert = $( '#alert' ),
@@ -434,6 +393,43 @@
 		window.setInterval( function () {
 			getLiveVids( true );
 		}, 60000 * 5 );
+
+		resizeVids();
+
+		$( '#nav a.ctrl' ).on( 'click', function( e ) {
+
+			e.preventDefault();
+			var $btn = $( this ),
+				id = $btn.attr( 'data-id' ),
+				$frame = $( '#' + $btn.attr( 'data-id' ) );
+
+			$btn.addClass( 'active' ).siblings().removeClass( 'active' );
+
+			if ( ! id ) {
+				return;
+			}
+
+			var curr_pip_pos = $( '.frame.pip' ).attr( 'style' );
+
+			$( '#frames' ).removeClass( 'split' );
+			$( '.frame' ).removeClass( 'focused' ).addClass( 'pip' );
+			if ( curr_pip_pos ) {
+				$( '.frame' ).attr( 'style', curr_pip_pos );
+			}
+			$frame.removeClass( 'pip' ).addClass( 'focused' ).removeAttr( 'style' );
+
+			resizeVids();
+			makeDraggable();
+
+		} );
+
+		$( 'a#split' ).on( 'click', function( e ) {
+
+			e.preventDefault();
+			$( '#frames' ).addClass( 'split' );
+			$( '.frame' ).removeClass( 'focused pip' );
+
+		} );
 
 	} )();</script>
 </body>
